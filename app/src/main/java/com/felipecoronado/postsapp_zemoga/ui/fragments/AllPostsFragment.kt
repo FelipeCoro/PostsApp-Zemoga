@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.felipecoronado.postsapp_zemoga.R
 import com.felipecoronado.postsapp_zemoga.databinding.FragmentAllPostsBinding
+import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.AllPostsAdapter
 
 class AllPostsFragment : Fragment() {
 
@@ -19,10 +20,24 @@ class AllPostsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_all_posts, container, false)
+            DataBindingUtil.inflate(
+                layoutInflater,
+                R.layout.fragment_all_posts,
+                container,
+                false
+            )
+
+        binding.lifecycleOwner = this
+
+        inflateRecycler()
 
         return binding.root
     }
+
+    private fun inflateRecycler(){
+        val adapter = AllPostsAdapter()
+        binding.allPostsRecyclerView.adapter = adapter
+    }
+
 }

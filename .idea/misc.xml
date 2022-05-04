@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/activity_main.xml" value="0.2734375" />
+        <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/adapter_all_posts.xml" value="0.2734375" />
+        <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/adapter_favorite_posts.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_all_posts.xml" value="0.2734375" />
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_favorite_posts.xml" value="0.2734375" />
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_post_list.xml" value="0.375" />

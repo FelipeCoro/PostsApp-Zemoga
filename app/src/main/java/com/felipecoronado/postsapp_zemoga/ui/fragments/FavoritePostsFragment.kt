@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.felipecoronado.postsapp_zemoga.R
 import com.felipecoronado.postsapp_zemoga.databinding.FragmentFavoritePostsBinding
+import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.AllPostsAdapter
 
 class FavoritePostsFragment : Fragment() {
     private lateinit var binding: FragmentFavoritePostsBinding
@@ -21,6 +22,13 @@ class FavoritePostsFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_favorite_posts, container, false)
 
+        inflateRecycler()
+
         return binding.root
+    }
+
+    private fun inflateRecycler(){
+        val adapter = AllPostsAdapter()
+        binding.favoritePostsRecyclerView.adapter = adapter
     }
 }
