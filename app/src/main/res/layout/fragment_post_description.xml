@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/postDescriptionToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            android:id="@+id/postDescriptionTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="74dp"
+            android:text="@string/descriptionTitleText"
+            android:textColor="#404040"
+            android:textColorHighlight="#232323"
+            android:textColorHint="#292929"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/descriptionContentTextView"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postDescriptionTitleTextView" />
+
+        <TextView
+            android:id="@+id/postUserTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/userTitleText"
+            android:textColor="#404040"
+            android:textColorHighlight="#232323"
+            android:textColorHint="#292929"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionContentTextView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postUserTitleTextView">
+
+            <TextView
+                android:id="@+id/userNameTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/userNameText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userEmailTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/userEmailText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userNameTitleTextView" />
+
+            <TextView
+                android:id="@+id/userPhoneTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/userPhoneText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userEmailTitleTextView" />
+
+            <TextView
+                android:id="@+id/userWebsiteTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/userWebsiteText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userPhoneTitleTextView" />
+
+            <TextView
+                android:id="@+id/userNameTextView"
+                android:layout_width="272dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/userNameTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userNameTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/userNameTitleTextView"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/userEmailTextView"
+                android:layout_width="272dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/userEmailTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/userEmailTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/userEmailTitleTextView"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/userPhoneTextView"
+                android:layout_width="272dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/userPhoneTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.471"
+                app:layout_constraintStart_toEndOf="@+id/userPhoneTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/userPhoneTitleTextView"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/userWebsiteTextView"
+                android:layout_width="272dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/userWebsiteTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.35"
+                app:layout_constraintStart_toEndOf="@+id/userWebsiteTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/userWebsiteTitleTextView"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/commentsTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#989191"
+            android:backgroundTint="#E1DEDE"
+            android:paddingStart="4dp"
+            android:text="@string/commentTitleText"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/commentsTitleTextView"
+            tools:itemCount="3"
+            tools:listitem="@layout/adapter_post_description" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

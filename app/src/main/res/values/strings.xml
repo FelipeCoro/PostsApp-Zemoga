@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PostsApp_Zemoga</string>
+    <string name="descriptionTitleText">Description</string>
+    <string name="userTitleText">User</string>
+    <string name="userNameText">Name</string>
+    <string name="userEmailText">Email</string>
+    <string name="userPhoneText">Phone</string>
+    <string name="userWebsiteText">Website</string>
+    <string name="commentTitleText">COMMENTS</string>
 </resources>
