@@ -33,8 +33,8 @@ class PostsListFragment: Fragment(){
         viewPager.adapter = ViewPagerAdapter(this)
         TabLayoutMediator(tabLayout, viewPager) { tab, index ->
             tab.text = when (index) {
-                0 -> { "First" }
-                1 -> { "Second" }
+                0 -> { "ALL" }
+                1 -> { "FAVORITES" }
                 else -> { throw Resources.NotFoundException("Position not found") }
             }
         }.attach()

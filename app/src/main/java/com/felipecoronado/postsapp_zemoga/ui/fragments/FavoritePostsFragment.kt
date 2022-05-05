@@ -22,13 +22,13 @@ class FavoritePostsFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_favorite_posts, container, false)
 
-        inflateRecycler()
+
 
         return binding.root
     }
 
-    private fun inflateRecycler(){
+  /*  private fun inflateRecycler(){
         val adapter = AllPostsAdapter()
         binding.favoritePostsRecyclerView.adapter = adapter
-    }
+    }*/
 }

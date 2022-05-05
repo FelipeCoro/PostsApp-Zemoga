@@ -5,15 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.felipecoronado.postsapp_zemoga.R
 import com.felipecoronado.postsapp_zemoga.databinding.FragmentAllPostsBinding
 import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.AllPostsAdapter
+import com.felipecoronado.postsapp_zemoga.ui.viewmodels.PostsListSharedViewModel
+import com.felipecoronado.postsapp_zemoga.ui.viewstates.PostsListViewState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllPostsFragment : Fragment() {
 
     private lateinit var binding: FragmentAllPostsBinding
+    private val viewModel: PostsListSharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,16 +34,24 @@ class AllPostsFragment : Fragment() {
                 container,
                 false
             )
-
         binding.lifecycleOwner = this
+        viewModel.viewState.observe(viewLifecycleOwner, ::handleViewState)
 
-        inflateRecycler()
+        viewModel.getAllPosts()
 
         return binding.root
     }
 
-    private fun inflateRecycler(){
-        val adapter = AllPostsAdapter()
+    private fun handleViewState(viewState:PostsListViewState) {
+        when(viewState) {
+            is PostsListViewState.PostsNotFound -> Toast.makeText(context,"Could not load Posts",Toast.LENGTH_LONG).show()
+            else -> inflateRecycler(viewState as PostsListViewState.AllPostsList)
+
+        }
+    }
+
+    private fun inflateRecycler(postsList:PostsListViewState.AllPostsList){
+        val adapter = AllPostsAdapter(postsList.posts)
         binding.allPostsRecyclerView.adapter = adapter
     }
 

@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.felipecoronado.postsapp_zemoga.R
+import com.felipecoronado.postsapp_zemoga.data.webservice.PostsResponse
 
-class AllPostsAdapter : RecyclerView.Adapter<AllPostsAdapter.AllPostsViewHolder>() {
+class AllPostsAdapter (private val postList: List<PostsResponse> ): RecyclerView.Adapter<AllPostsAdapter.AllPostsViewHolder>() {
 
     class AllPostsViewHolder(postView: View) : RecyclerView.ViewHolder(postView) {
         val postView: TextView = postView.findViewById(R.id.postTextView)
@@ -22,13 +23,10 @@ class AllPostsAdapter : RecyclerView.Adapter<AllPostsAdapter.AllPostsViewHolder>
     }
 
     override fun onBindViewHolder(holder: AllPostsViewHolder, position: Int) {
-        val postList = listOf("firstPost", "SecondPost", "thirdPost")
-        for (post in postList) {
-            holder.postView.text = post
+        val post = postList[position]
+            holder.postView.text = post.title
         }
 
-    }
-
-    override fun getItemCount() = 10
+    override fun getItemCount() = postList.size
 
 }
