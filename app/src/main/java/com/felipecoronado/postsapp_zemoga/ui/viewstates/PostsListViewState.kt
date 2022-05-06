@@ -1,7 +1,6 @@
 package com.felipecoronado.postsapp_zemoga.ui.viewstates
 
-import com.felipecoronado.postsapp_zemoga.data.webservice.PostsResponse
-import retrofit2.Response
+import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 
 sealed interface PostsListViewState{
 

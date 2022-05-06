@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/postsListFragment"
         android:name="com.felipecoronado.postsapp_zemoga.ui.fragments.PostsListFragment"
-        android:label="PostsListFragment" />
+        android:label="PostsListFragment" >
+        <action
+            android:id="@+id/action_postsListFragment_to_postDescriptionFragment"
+            app:destination="@id/postDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDescriptionFragment"
+        android:name="com.felipecoronado.postsapp_zemoga.ui.fragments.PostDescriptionFragment"
+        android:label="PostDescriptionFragment" >
+        <argument
+            android:name="postId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -1,17 +1,16 @@
 package com.felipecoronado.postsapp_zemoga.domain.usecases
 
 import com.felipecoronado.postsapp_zemoga.data.repositories.IPostRepository.IPostsRepository
-import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
-import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetAllPostsList
+import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.CommentsResponse
+import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetCommentsById
 import javax.inject.Inject
 
-
-class GetAllPostsList  @Inject constructor(
+class GetCommentsById @Inject constructor(
     private val postsRepository: IPostsRepository
-): IGetAllPostsList {
+) : IGetCommentsById {
 
-    override suspend fun invoke(): Result<List<PostsResponse>> {
-        val result = postsRepository.getPosts()
+    override suspend fun invoke(postId:Int): Result<List<CommentsResponse>> {
+        val result = postsRepository.getCommentsByPostId(postId)
 
         return if (result.isFailure) {
             Result.failure(result.exceptionOrNull() ?: Exception())
@@ -20,3 +19,4 @@ class GetAllPostsList  @Inject constructor(
         }
     }
 }
+

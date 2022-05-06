@@ -27,8 +27,5 @@ class FavoritePostsFragment : Fragment() {
         return binding.root
     }
 
-  /*  private fun inflateRecycler(){
-        val adapter = AllPostsAdapter()
-        binding.favoritePostsRecyclerView.adapter = adapter
-    }*/
+
 }

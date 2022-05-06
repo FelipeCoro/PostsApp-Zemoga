@@ -10,7 +10,7 @@ import com.felipecoronado.postsapp_zemoga.R
 class FavoritePostsAdapter: RecyclerView.Adapter<FavoritePostsAdapter.FavoritePostsViewHolder>() {
 
     class FavoritePostsViewHolder(postView: View) : RecyclerView.ViewHolder(postView) {
-        val postView: TextView = postView.findViewById(R.id.postTextView)
+        val postView: TextView = postView.findViewById(R.id.commentTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritePostsViewHolder {

@@ -6,27 +6,34 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.felipecoronado.postsapp_zemoga.R
-import com.felipecoronado.postsapp_zemoga.data.webservice.PostsResponse
+import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 
-class AllPostsAdapter (private val postList: List<PostsResponse> ): RecyclerView.Adapter<AllPostsAdapter.AllPostsViewHolder>() {
+class AllPostsAdapter(
+    private val postList: List<PostsResponse>,
+    private val clickListener: OnItemClickListener
+) : RecyclerView.Adapter<AllPostsAdapter.AllPostsViewHolder>() {
 
     class AllPostsViewHolder(postView: View) : RecyclerView.ViewHolder(postView) {
-        val postView: TextView = postView.findViewById(R.id.postTextView)
+        val postView: TextView = postView.findViewById(R.id.commentTextView)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllPostsViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_all_posts, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.adapter_all_posts, parent, false)
         return AllPostsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AllPostsViewHolder, position: Int) {
         val post = postList[position]
-            holder.postView.text = post.title
-        }
+        holder.postView.text = post.title
+        holder.postView.setOnClickListener { clickListener.navigate(post.id,post.userId) }
+
+    }
 
     override fun getItemCount() = postList.size
+
+    interface OnItemClickListener {
+        fun navigate(postId: Int, userId:Int)
+    }
 
 }
