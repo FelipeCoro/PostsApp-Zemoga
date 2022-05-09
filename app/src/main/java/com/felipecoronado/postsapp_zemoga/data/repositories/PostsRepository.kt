@@ -1,5 +1,7 @@
 package com.felipecoronado.postsapp_zemoga.data.repositories
 
+import com.felipecoronado.postsapp_zemoga.data.database.room.daos.FavoritePostsDao
+import com.felipecoronado.postsapp_zemoga.data.database.room.models.FavoritePosts
 import com.felipecoronado.postsapp_zemoga.data.repositories.IPostRepository.IPostsRepository
 import com.felipecoronado.postsapp_zemoga.data.utils.NetworkException
 import com.felipecoronado.postsapp_zemoga.data.webservice.PostsProviderService
@@ -8,10 +10,12 @@ import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.UsersResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
 
 class PostsRepository @Inject constructor(
-    private val postsProvider: PostsProviderService
+    private val postsProvider: PostsProviderService,
+    private val favoritePostsDao: FavoritePostsDao
 ) : IPostsRepository {
 
     override suspend fun getPosts(): Result<List<PostsResponse>> {
@@ -56,7 +60,7 @@ class PostsRepository @Inject constructor(
         }
     }
 
-    override suspend fun getUserById(userId:Int): Result<UsersResponse?> {
+    override suspend fun getUserById(userId: Int): Result<UsersResponse?> {
         return withContext(Dispatchers.IO) {
             val response = postsProvider.getUserById(userId)
             when {
@@ -82,7 +86,7 @@ class PostsRepository @Inject constructor(
             val response = postsProvider.getCommentsByPostId(postId)
             when {
                 response.isSuccessful -> {
-                    val comment = response.body()?: listOf()
+                    val comment = response.body() ?: listOf()
                     Result.success(comment)
                 }
                 else -> {
@@ -98,6 +102,21 @@ class PostsRepository @Inject constructor(
         }
     }
 
+    override suspend fun togglePostAsFavorite(post: PostsResponse): Result<List<FavoritePosts>?> {
+       return when {
+           favoritePostsDao.getFavoritePostFromList(post.id) == null -> {
+               val favoritePost = FavoritePosts(post.userId,post.id,post.title,post.body)
+               favoritePostsDao.addPost(favoritePost)
+               Result.success(favoritePostsDao.getFavoritePostList())
+           }
+           favoritePostsDao.getFavoritePostFromList(post.id) != null  -> {
+               favoritePostsDao.removePost(post.id)
+               Result.success(favoritePostsDao.getFavoritePostList())
+
+           }
+           else -> {Result.failure(Exception("Cool Enums Exception Utils Class"))}
+       }
+    }
 }
 
 

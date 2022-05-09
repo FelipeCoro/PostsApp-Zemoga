@@ -7,4 +7,6 @@
     <string name="userPhoneText">Phone</string>
     <string name="userWebsiteText">Website</string>
     <string name="commentTitleText">COMMENTS</string>
+    <string name="postDesTitleTextView" />
+    <string name="allPostTitleText">Posts</string>
 </resources>

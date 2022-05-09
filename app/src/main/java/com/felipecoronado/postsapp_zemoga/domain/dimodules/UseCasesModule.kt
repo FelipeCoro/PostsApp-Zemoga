@@ -1,13 +1,7 @@
 package com.felipecoronado.postsapp_zemoga.domain.dimodules
 
-import com.felipecoronado.postsapp_zemoga.domain.usecases.GetAllPostsList
-import com.felipecoronado.postsapp_zemoga.domain.usecases.GetCommentsById
-import com.felipecoronado.postsapp_zemoga.domain.usecases.GetPostById
-import com.felipecoronado.postsapp_zemoga.domain.usecases.GetUserById
-import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetAllPostsList
-import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetCommentsById
-import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetPostById
-import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetUserById
+import com.felipecoronado.postsapp_zemoga.domain.usecases.*
+import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,4 +22,7 @@ abstract class UseCasesModule {
 
     @Binds
     abstract fun bindsGetCommentsById(useCase: GetCommentsById): IGetCommentsById
+
+    @Binds
+    abstract fun bindsTogglePostAsFavorite(useCase:TogglePostAsFavorite):ITogglePostAsFavorite
 }

@@ -9,11 +9,15 @@
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/adapter_post_description.xml" value="0.2734375" />
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_all_posts.xml" value="0.2734375" />
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_favorite_posts.xml" value="0.2734375" />
-        <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_post_description.xml" value="0.25" />
+        <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_post_description.xml" value="0.45" />
         <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_post_list.xml" value="0.375" />
-        <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_posts_list.xml" value="0.25" />
+        <entry key="..\:/Users/Felipe/AndroidStudioProjects/PostsApp_Zemoga/app/src/main/res/layout/fragment_posts_list.xml" value="0.45" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/felipecoronado/postsapp_zemoga/domain/usecases/RemovePostFromFavorites.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/felipecoronado/postsapp_zemoga/domain/usecases/SavePostAsFavorite.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,7 +24,7 @@ class PostDescriptionFragment : Fragment() {
     private lateinit var binding: FragmentPostDescriptionBinding
     private val viewModel: PostDescriptionViewModel by activityViewModels()
     private val args: PostDescriptionFragmentArgs by navArgs()
-
+    private lateinit var favoriteButton: ImageView
 
 
     override fun onCreateView(
@@ -39,17 +41,19 @@ class PostDescriptionFragment : Fragment() {
                 false
             )
 
+        val postId = args.postId
 
         binding.lifecycleOwner = this
         viewModel.viewState.observe(viewLifecycleOwner, ::handleViewState)
-
-        val postId = args.postId
-
         viewModel.getPost(postId)
+        favoriteButton = binding.favoritePostToggleButton
+        favoriteButton.setOnClickListener {
+            viewModel.togglePostFromFavorites()
+        }
+
 
         return binding.root
     }
-
 
 
     private fun handleViewState(viewState: PostDescriptionViewState) {
@@ -57,6 +61,7 @@ class PostDescriptionFragment : Fragment() {
             is PostDescriptionViewState.PostFetchSuccessful -> populatePostBody(viewState.post)
             is PostDescriptionViewState.UserFetchSuccessful -> populateUser(viewState.user)
             is PostDescriptionViewState.PostCommentsList -> populateCommentsRecyclerView(viewState.commentsList)
+            is PostDescriptionViewState.FavoritePostsList -> updateUI()
             is PostDescriptionViewState.UserNotFound -> showError("ERROR1")
             is PostDescriptionViewState.PostsNotFound -> showError("ERROR2")
             else -> showError("ERROR3")
@@ -84,12 +89,22 @@ class PostDescriptionFragment : Fragment() {
         binding.commentsRecyclerView .adapter = adapter
     }
 
+    private fun updateUI(){
+
+        if(favoriteButton.drawable.constantState == ResourcesCompat.getDrawable(resources,R.drawable.star_outline,null)?.constantState){
+            favoriteButton.setImageResource(R.drawable.star_2_)
+        }
+        else {
+            favoriteButton.setImageResource(R.drawable.star_outline)
+        }
+    }
+
     private fun showError(errorType: String) {
 
         when (errorType) {
-            "ERROR1" -> Toast.makeText(activity, "tooLazy", Toast.LENGTH_LONG).show()
-            "ERROR2" -> Toast.makeText(activity, "tooLazy", Toast.LENGTH_LONG).show()
-            "ERROR3" -> Toast.makeText(activity, "tooLazy", Toast.LENGTH_LONG).show()
+            "ERROR1" -> Toast.makeText(activity, "TooLazy", Toast.LENGTH_LONG).show()
+            "ERROR2" -> Toast.makeText(activity, "TooLazy", Toast.LENGTH_LONG).show()
+            "ERROR3" -> Toast.makeText(activity, "TooLazy", Toast.LENGTH_LONG).show()
         }
     }
 }

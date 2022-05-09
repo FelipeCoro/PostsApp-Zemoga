@@ -1,10 +1,10 @@
-package com.felipecoronado.postsapp_zemoga.data.webservice.dtos
+package com.felipecoronado.postsapp_zemoga.data.database.room.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class PostsResponse (
+@Entity (tableName = "favoritePosts_table")
+data class FavoritePosts(
     val userId:Int,
     @PrimaryKey(autoGenerate = false)
     val id:Int,

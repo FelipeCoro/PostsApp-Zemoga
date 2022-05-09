@@ -16,6 +16,7 @@
         android:theme="?attr/actionBarTheme" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -190,7 +191,27 @@
             tools:itemCount="3"
             tools:listitem="@layout/adapter_post_description" />
 
+        <ImageView
+            android:id="@+id/favoritePostToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/refreshAllPostsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/star_outline" />
+
+        <ImageView
+            android:id="@+id/refreshAllPostsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/postDescriptionTitleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/arrow_left" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
