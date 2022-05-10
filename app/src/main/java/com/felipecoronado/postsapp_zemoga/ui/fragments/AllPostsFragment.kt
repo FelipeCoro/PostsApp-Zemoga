@@ -14,7 +14,8 @@ import com.felipecoronado.postsapp_zemoga.R
 import com.felipecoronado.postsapp_zemoga.databinding.FragmentAllPostsBinding
 import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.AllPostsAdapter
 import com.felipecoronado.postsapp_zemoga.ui.viewmodels.PostsListSharedViewModel
-import com.felipecoronado.postsapp_zemoga.ui.viewstates.PostsListViewState
+import com.felipecoronado.postsapp_zemoga.ui.viewstates.AllPostsListViewState
+import com.felipecoronado.postsapp_zemoga.ui.viewstates.FavoritePostsListViewState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,26 +37,26 @@ class AllPostsFragment : Fragment(), AllPostsAdapter.OnItemClickListener {
                 false
             )
         binding.lifecycleOwner = this
-        viewModel.viewState.observe(viewLifecycleOwner, ::handleViewState)
+        viewModel.allViewState.observe(viewLifecycleOwner, ::handleViewState)
 
         viewModel.getAllPosts()
 
         return binding.root
     }
 
-    private fun handleViewState(viewState: PostsListViewState) {
+    private fun handleViewState(viewState: AllPostsListViewState) {
         when (viewState) {
-            is PostsListViewState.PostsNotFound -> Toast.makeText(
+            is AllPostsListViewState.AllPostsNotFound -> Toast.makeText(
                 context,
                 "Could not load Posts",
                 Toast.LENGTH_LONG
             ).show()
-            else -> inflateRecycler(viewState as PostsListViewState.AllPostsList)
+            else -> inflateRecycler(viewState as AllPostsListViewState.AllPostsList)
 
         }
     }
 
-    private fun inflateRecycler(postsList: PostsListViewState.AllPostsList) {
+    private fun inflateRecycler(postsList: AllPostsListViewState.AllPostsList) {
         val adapter = AllPostsAdapter(postsList.posts, this)
         binding.allPostsRecyclerView.adapter = adapter
 

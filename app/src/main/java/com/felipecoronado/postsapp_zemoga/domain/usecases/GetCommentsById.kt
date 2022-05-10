@@ -13,7 +13,7 @@ class GetCommentsById @Inject constructor(
         val result = postsRepository.getCommentsByPostId(postId)
 
         return if (result.isFailure) {
-            Result.failure(result.exceptionOrNull() ?: Exception())
+            Result.failure(Exception())
         } else {
             result
         }

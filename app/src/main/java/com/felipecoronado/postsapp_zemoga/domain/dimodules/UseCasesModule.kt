@@ -25,4 +25,7 @@ abstract class UseCasesModule {
 
     @Binds
     abstract fun bindsTogglePostAsFavorite(useCase:TogglePostAsFavorite):ITogglePostAsFavorite
+
+    @Binds
+    abstract fun bindsGetAllFavoritesPostsList(useCase:GetAllFavoritesPostsList):IGetAllFavoritesPostsList
 }

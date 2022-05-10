@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.felipecoronado.postsapp_zemoga.R
 import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.CommentsResponse
@@ -51,7 +52,12 @@ class PostDescriptionFragment : Fragment() {
             viewModel.togglePostFromFavorites()
         }
 
-
+        binding.backToAllPostsButton.setOnClickListener {
+            val directionToFragment =
+                PostDescriptionFragmentDirections.actionPostDescriptionFragmentToPostsListFragment()
+            Navigation.findNavController(binding.root)
+                .navigate(directionToFragment)
+        }
         return binding.root
     }
 

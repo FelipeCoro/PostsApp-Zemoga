@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/descriptionContentTextView"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="TextView"
             android:textSize="16sp"
@@ -196,12 +196,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/refreshAllPostsButton"
+            app:layout_constraintBottom_toBottomOf="@+id/backToAllPostsButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/star_outline" />
 
         <ImageView
-            android:id="@+id/refreshAllPostsButton"
+            android:id="@+id/backToAllPostsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

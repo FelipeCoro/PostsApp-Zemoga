@@ -19,5 +19,8 @@
         <argument
             android:name="postId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_postDescriptionFragment_to_postsListFragment"
+            app:destination="@id/postsListFragment" />
     </fragment>
 </navigation>

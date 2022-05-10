@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoritePostRecycleView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -19,6 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="6"
-        tools:listitem="@layout/adapter_all_posts"/>
+        tools:listitem="@layout/adapter_all_posts" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

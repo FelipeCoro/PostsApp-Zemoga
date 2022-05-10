@@ -10,7 +10,6 @@ import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.UsersResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
 
 class PostsRepository @Inject constructor(
@@ -103,22 +102,33 @@ class PostsRepository @Inject constructor(
     }
 
     override suspend fun togglePostAsFavorite(post: PostsResponse): Result<List<FavoritePosts>?> {
-       return when {
-           favoritePostsDao.getFavoritePostFromList(post.id) == null -> {
-               val favoritePost = FavoritePosts(post.userId,post.id,post.title,post.body)
-               favoritePostsDao.addPost(favoritePost)
-               Result.success(favoritePostsDao.getFavoritePostList())
-           }
-           favoritePostsDao.getFavoritePostFromList(post.id) != null  -> {
-               favoritePostsDao.removePost(post.id)
-               Result.success(favoritePostsDao.getFavoritePostList())
+        return when {
+            favoritePostsDao.getFavoritePostFromList(post.id) == null -> {
+                val favoritePost = FavoritePosts(post.userId, post.id, post.title, post.body)
+                favoritePostsDao.addPost(favoritePost)
+                Result.success(favoritePostsDao.getFavoritePostList())
+            }
+            favoritePostsDao.getFavoritePostFromList(post.id) != null -> {
+                favoritePostsDao.removePost(post.id)
+                Result.success(favoritePostsDao.getFavoritePostList())
+            }
+            else -> {
+                Result.failure(Exception("Cool Enums Exception Utils Class"))
+            }
+        }
+    }
 
-           }
-           else -> {Result.failure(Exception("Cool Enums Exception Utils Class"))}
-       }
+    override suspend fun getFavoritePosts(): Result<List<FavoritePosts>> {
+        return withContext(Dispatchers.Main) {
+
+            val favoriteList = favoritePostsDao.getFavoritePostList()
+            when {
+                favoriteList.isNullOrEmpty() -> Result.failure(Exception("No post saved as favorite"))
+                else -> {
+                    Result.success(favoriteList)
+                }
+            }
+
+        }
     }
 }
-
-
-
-

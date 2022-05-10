@@ -16,7 +16,7 @@ interface FavoritePostsDao {
     suspend fun removePost(postId:Int)
 
     @Query("SELECT * FROM favoritePosts_table")
-    suspend fun getFavoritePostList() : List<FavoritePosts>
+    suspend fun getFavoritePostList() : List<FavoritePosts>?
 
     @Query("SELECT * FROM favoritePosts_table WHERE id = :postId")
     suspend fun getFavoritePostFromList(postId:Int) : FavoritePosts?
