@@ -11,6 +11,7 @@ sealed interface PostDescriptionViewState {
     data class UserFetchSuccessful(val user: UsersResponse) : PostDescriptionViewState
     data class PostCommentsList(val commentsList: List<CommentsResponse>) : PostDescriptionViewState
     data class FavoritePostsList(val posts: List<FavoritePosts>) :  PostDescriptionViewState
+    data class FavoritePost(val post: PostsResponse) :  PostDescriptionViewState
 
     object NullPost : PostDescriptionViewState
     object PostsNotFound : PostDescriptionViewState

@@ -10,5 +10,5 @@ data class PostsResponse (
     val id:Int,
     val title: String,
     val body:String,
-    val favorite:Boolean = false
+    var favorite:Boolean = false
 )

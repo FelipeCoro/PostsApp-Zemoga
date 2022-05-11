@@ -6,9 +6,9 @@ import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.ITogglePostAsFavorite
 import javax.inject.Inject
 
-class TogglePostAsFavorite@Inject constructor(
+class TogglePostAsFavorite @Inject constructor(
     private val postsRepository: IPostsRepository
-):ITogglePostAsFavorite {
+) : ITogglePostAsFavorite {
     override suspend fun invoke(post: PostsResponse): Result<List<FavoritePosts>?> {
         return postsRepository.togglePostAsFavorite(post)
     }

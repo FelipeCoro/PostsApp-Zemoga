@@ -20,6 +20,7 @@ import com.felipecoronado.postsapp_zemoga.databinding.FragmentPostDescriptionBin
 import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.PostCommentsAdapter
 import com.felipecoronado.postsapp_zemoga.ui.viewmodels.PostDescriptionViewModel
 import com.felipecoronado.postsapp_zemoga.ui.viewstates.PostDescriptionViewState
+import retrofit2.http.POST
 
 class PostDescriptionFragment : Fragment() {
     private lateinit var binding: FragmentPostDescriptionBinding
@@ -64,10 +65,11 @@ class PostDescriptionFragment : Fragment() {
 
     private fun handleViewState(viewState: PostDescriptionViewState) {
         when (viewState) {
-            is PostDescriptionViewState.PostFetchSuccessful -> populatePostBody(viewState.post)
+            is PostDescriptionViewState.PostFetchSuccessful -> {populatePostBody(viewState.post); updateUI(viewState.post)}
             is PostDescriptionViewState.UserFetchSuccessful -> populateUser(viewState.user)
             is PostDescriptionViewState.PostCommentsList -> populateCommentsRecyclerView(viewState.commentsList)
-            is PostDescriptionViewState.FavoritePostsList -> updateUI()
+            is PostDescriptionViewState.FavoritePostsList -> ""
+            is PostDescriptionViewState.FavoritePost-> updateUI(viewState.post)
             is PostDescriptionViewState.UserNotFound -> showError("ERROR1")
             is PostDescriptionViewState.PostsNotFound -> showError("ERROR2")
             else -> showError("ERROR3")
@@ -95,9 +97,9 @@ class PostDescriptionFragment : Fragment() {
         binding.commentsRecyclerView .adapter = adapter
     }
 
-    private fun updateUI(){
+    private fun updateUI(post: PostsResponse){
 
-        if(favoriteButton.drawable.constantState == ResourcesCompat.getDrawable(resources,R.drawable.star_outline,null)?.constantState){
+        if(post.favorite){
             favoriteButton.setImageResource(R.drawable.star_2_)
         }
         else {

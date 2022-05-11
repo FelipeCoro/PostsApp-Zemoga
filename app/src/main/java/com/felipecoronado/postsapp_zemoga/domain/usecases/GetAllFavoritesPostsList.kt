@@ -9,7 +9,7 @@ class GetAllFavoritesPostsList @Inject constructor(
     private val postsRepository: IPostsRepository
 ): IGetAllFavoritesPostsList {
     override suspend fun invoke(): Result<List<FavoritePosts>> {
-        val result = postsRepository.getFavoritePosts()
+        val result = postsRepository.getFavoritePostsList()
         return if (result.isFailure) {
             Result.failure(Exception())
         } else {

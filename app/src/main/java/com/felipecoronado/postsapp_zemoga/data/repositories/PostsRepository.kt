@@ -104,11 +104,13 @@ class PostsRepository @Inject constructor(
     override suspend fun togglePostAsFavorite(post: PostsResponse): Result<List<FavoritePosts>?> {
         return when {
             favoritePostsDao.getFavoritePostFromList(post.id) == null -> {
+                post.favorite = true
                 val favoritePost = FavoritePosts(post.userId, post.id, post.title, post.body)
                 favoritePostsDao.addPost(favoritePost)
                 Result.success(favoritePostsDao.getFavoritePostList())
             }
             favoritePostsDao.getFavoritePostFromList(post.id) != null -> {
+                post.favorite = false
                 favoritePostsDao.removePost(post.id)
                 Result.success(favoritePostsDao.getFavoritePostList())
             }
@@ -118,7 +120,8 @@ class PostsRepository @Inject constructor(
         }
     }
 
-    override suspend fun getFavoritePosts(): Result<List<FavoritePosts>> {
+
+    override suspend fun getFavoritePostsList(): Result<List<FavoritePosts>> {
         return withContext(Dispatchers.Main) {
 
             val favoriteList = favoritePostsDao.getFavoritePostList()

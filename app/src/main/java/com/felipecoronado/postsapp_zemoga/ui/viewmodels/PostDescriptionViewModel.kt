@@ -69,7 +69,7 @@ class PostDescriptionViewModel @Inject constructor(
             when (val notNullResult = result.getOrNull()
             ) {
                 null -> setViewState(PostDescriptionViewState.PostsNotFound)
-                else -> setViewState(PostDescriptionViewState.FavoritePostsList(notNullResult))
+                else -> setViewState(PostDescriptionViewState.FavoritePost(thisPost))
             }
         }
 

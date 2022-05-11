@@ -2,8 +2,8 @@ package com.felipecoronado.postsapp_zemoga.domain.usecases
 
 import com.felipecoronado.postsapp_zemoga.data.repositories.IPostRepository.IPostsRepository
 import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
-import com.felipecoronado.postsapp_zemoga.domain.utils.MaperPost
 import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetAllPostsList
+import com.felipecoronado.postsapp_zemoga.domain.utils.MaperPost
 import javax.inject.Inject
 
 
@@ -11,9 +11,9 @@ class GetAllPostsList @Inject constructor(
     private val postsRepository: IPostsRepository
 ) : IGetAllPostsList {
 
-    override suspend fun invoke(): Result<MutableList<PostsResponse>> {
+    override suspend operator fun invoke(): Result<MutableList<PostsResponse>> {
         val resultAllPostList = postsRepository.getPosts()
-        val resultFavoritePostList = postsRepository.getFavoritePosts()
+        val resultFavoritePostList = postsRepository.getFavoritePostsList()
         var favoriteList = resultFavoritePostList.getOrNull()
 
         if (favoriteList == null) {

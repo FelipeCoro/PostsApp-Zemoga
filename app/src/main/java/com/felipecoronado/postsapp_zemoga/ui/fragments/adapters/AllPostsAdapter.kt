@@ -33,6 +33,7 @@ class AllPostsAdapter(
         holder.postView.text = post.title
         holder.postView.setOnClickListener { clickListener.navigate(post.id,post.userId) }
         holder.deleteButton.setOnClickListener { deletePost(position) }
+
         if(post.favorite){
             holder.favoritePost.visibility= View.VISIBLE
         }
@@ -50,15 +51,7 @@ class AllPostsAdapter(
     {
         allPostList.removeAt(position)
         notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 
-    fun clearAllPosts() {
-        val size: Int = allPostList.size
-        if (size > 0) {
-            for (post in allPostList) {
-                allPostList.remove(post)
-            }
-            notifyItemRangeRemoved(0, size)
-        }
-    }
 }
