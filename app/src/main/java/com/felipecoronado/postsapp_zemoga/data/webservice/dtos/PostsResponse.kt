@@ -9,5 +9,6 @@ data class PostsResponse (
     @PrimaryKey(autoGenerate = false)
     val id:Int,
     val title: String,
-    val body:String
+    val body:String,
+    val favorite:Boolean = false
 )

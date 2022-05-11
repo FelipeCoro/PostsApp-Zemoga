@@ -6,8 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetAllFavoritesPostsList
 import com.felipecoronado.postsapp_zemoga.domain.usecases.interfaces.IGetAllPostsList
 import com.felipecoronado.postsapp_zemoga.ui.utils.asLiveData
-import com.felipecoronado.postsapp_zemoga.ui.viewstates.AllPostsListViewState
-import com.felipecoronado.postsapp_zemoga.ui.viewstates.FavoritePostsListViewState
+import com.felipecoronado.postsapp_zemoga.ui.viewstates.PostsListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,18 +18,15 @@ class PostsListSharedViewModel @Inject constructor(
     private val getAllFavoritesList: IGetAllFavoritesPostsList
     ) : ViewModel() {
 
-    private val _allViewState = MutableLiveData<AllPostsListViewState>()
-    val allViewState = _allViewState.asLiveData()
-
-    private val _favoriteViewState = MutableLiveData<FavoritePostsListViewState>()
-    val favoriteViewState = _favoriteViewState.asLiveData()
+    private val _viewState = MutableLiveData<PostsListViewState>()
+    val viewState = _viewState.asLiveData()
 
     fun getAllPosts() {
         viewModelScope.launch(Dispatchers.IO) {
             val result = getAllPostsList.invoke()
             when {
-                result.isSuccess -> setAllListViewState(AllPostsListViewState.AllPostsList(result.getOrThrow()))
-                else -> setAllListViewState(AllPostsListViewState.AllPostsNotFound)
+                result.isSuccess -> setPostListViewState(PostsListViewState.AllPostsList(result.getOrThrow()))
+                else -> setPostListViewState(PostsListViewState.PostsNotFound)
 
             }
         }
@@ -40,23 +36,20 @@ class PostsListSharedViewModel @Inject constructor(
         viewModelScope.launch() {
             val result = getAllFavoritesList.invoke()
             when {
-                result.isSuccess -> setFavoriteListViewState(FavoritePostsListViewState.FavoritePostList(result.getOrThrow()))
-                else -> setFavoriteListViewState(FavoritePostsListViewState.EmptyListAll)
+                result.isSuccess -> setPostListViewState(PostsListViewState.FavoritePostsList(result.getOrThrow()))
+                else -> setPostListViewState(PostsListViewState.PostsNotFound)
 
             }
         }
     }
 
     fun wipeRecycler(){
-        setAllListViewState(AllPostsListViewState.AllPostsList(mutableListOf()))
+        setPostListViewState(PostsListViewState.AllPostsList(mutableListOf()))
     }
 
 
-    private fun setAllListViewState(newViewState:AllPostsListViewState){
-        _allViewState.postValue(newViewState)
+    private fun setPostListViewState(newViewState:PostsListViewState){
+        _viewState.postValue(newViewState)
     }
 
-    private fun setFavoriteListViewState(newViewState:FavoritePostsListViewState){
-        _favoriteViewState.postValue(newViewState)
-    }
 }

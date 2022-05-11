@@ -1,6 +1,5 @@
 package com.felipecoronado.postsapp_zemoga.ui.fragments.adapters
 
-import android.R.attr.data
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +7,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.felipecoronado.postsapp_zemoga.R
+import com.felipecoronado.postsapp_zemoga.data.database.room.models.FavoritePosts
 import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 
 
 class AllPostsAdapter(
-    private val postList: MutableList<PostsResponse>,
+    private val allPostList: MutableList<PostsResponse>,
     private val clickListener: OnItemClickListener
 ) : RecyclerView.Adapter<AllPostsAdapter.AllPostsViewHolder>() {
 
     class AllPostsViewHolder(postView: View) : RecyclerView.ViewHolder(postView) {
         val postView: TextView = postView.findViewById(R.id.commentTextView)
         val deleteButton:ImageView = postView.findViewById(R.id.deletePostButton)
+        val favoritePost:ImageView = postView.findViewById(R.id.favoritePostImageView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllPostsViewHolder {
@@ -28,14 +29,18 @@ class AllPostsAdapter(
     }
 
     override fun onBindViewHolder(holder: AllPostsViewHolder, position: Int) {
-        val post = postList[position]
+        val post = allPostList[position]
         holder.postView.text = post.title
         holder.postView.setOnClickListener { clickListener.navigate(post.id,post.userId) }
         holder.deleteButton.setOnClickListener { deletePost(position) }
+        if(post.favorite){
+            holder.favoritePost.visibility= View.VISIBLE
+        }
+        else{holder.favoritePost.visibility = View.GONE}
 
     }
 
-    override fun getItemCount() = postList.size
+    override fun getItemCount() = allPostList.size
 
     interface OnItemClickListener {
         fun navigate(postId: Int, userId:Int)
@@ -43,15 +48,15 @@ class AllPostsAdapter(
 
     private fun deletePost(position: Int)
     {
-        postList.removeAt(position)
+        allPostList.removeAt(position)
         notifyItemRemoved(position)
     }
 
     fun clearAllPosts() {
-        val size: Int = postList.size
+        val size: Int = allPostList.size
         if (size > 0) {
-            for (post in postList) {
-                postList.remove(post)
+            for (post in allPostList) {
+                allPostList.remove(post)
             }
             notifyItemRangeRemoved(0, size)
         }

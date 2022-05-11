@@ -13,7 +13,7 @@ import com.felipecoronado.postsapp_zemoga.R
 import com.felipecoronado.postsapp_zemoga.databinding.FragmentFavoritePostsBinding
 import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.FavoritePostsAdapter
 import com.felipecoronado.postsapp_zemoga.ui.viewmodels.PostsListSharedViewModel
-import com.felipecoronado.postsapp_zemoga.ui.viewstates.FavoritePostsListViewState
+import com.felipecoronado.postsapp_zemoga.ui.viewstates.PostsListViewState
 
 class FavoritePostsFragment : Fragment(),FavoritePostsAdapter.OnItemClickListener {
     private lateinit var binding: FragmentFavoritePostsBinding
@@ -34,27 +34,32 @@ class FavoritePostsFragment : Fragment(),FavoritePostsAdapter.OnItemClickListene
             )
 
         binding.lifecycleOwner = this
-        viewModel.favoriteViewState.observe(viewLifecycleOwner, ::handleViewState)
+        viewModel.viewState.observe(viewLifecycleOwner, ::handleViewState)
 
         viewModel.getAllFavoritesPosts()
 
         return binding.root
     }
 
-    private fun handleViewState(viewState: FavoritePostsListViewState) {
+    private fun handleViewState(viewState: PostsListViewState) {
         when (viewState) {
-            is FavoritePostsListViewState.EmptyListAll -> Toast.makeText(
-                context,
-                "No posts marked as favorite",
-                Toast.LENGTH_LONG
-            ).show()
-            else -> inflateRecycler(viewState as FavoritePostsListViewState.FavoritePostList)
+            is PostsListViewState.PostsNotFound -> showMessage()
+            is PostsListViewState.AllPostsList -> ""
+            else -> inflateRecycler(viewState as PostsListViewState.FavoritePostsList)
 
         }
     }
 
-    private fun inflateRecycler(postsList: FavoritePostsListViewState.FavoritePostList) {
-        val adapter = FavoritePostsAdapter(postsList.postsList, this)
+    private fun showMessage() {
+        Toast.makeText(
+            context,
+            "No posts marked as favorite",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun inflateRecycler(postsList: PostsListViewState.FavoritePostsList) {
+        val adapter = FavoritePostsAdapter(postsList.favoritePosts, this)
         binding.favoritePostRecycleView.adapter = adapter
 
     }
