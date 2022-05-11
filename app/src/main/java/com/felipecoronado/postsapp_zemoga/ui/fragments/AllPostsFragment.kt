@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.felipecoronado.postsapp_zemoga.R
+import com.felipecoronado.postsapp_zemoga.data.database.room.models.FavoritePosts
+import com.felipecoronado.postsapp_zemoga.data.webservice.dtos.PostsResponse
 import com.felipecoronado.postsapp_zemoga.databinding.FragmentAllPostsBinding
 import com.felipecoronado.postsapp_zemoga.ui.fragments.adapters.AllPostsAdapter
 import com.felipecoronado.postsapp_zemoga.ui.viewmodels.PostsListSharedViewModel
@@ -23,6 +25,7 @@ class AllPostsFragment : Fragment(), AllPostsAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentAllPostsBinding
     private val viewModel: PostsListSharedViewModel by activityViewModels()
+    private var favoriteList = mutableListOf<FavoritePosts>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,8 +41,11 @@ class AllPostsFragment : Fragment(), AllPostsAdapter.OnItemClickListener {
             )
         binding.lifecycleOwner = this
         viewModel.allViewState.observe(viewLifecycleOwner, ::handleViewState)
+        viewModel.favoriteViewState.observe(viewLifecycleOwner, ::handleViewState)
 
         viewModel.getAllPosts()
+
+
 
         return binding.root
     }
@@ -56,9 +62,24 @@ class AllPostsFragment : Fragment(), AllPostsAdapter.OnItemClickListener {
         }
     }
 
+    private fun handleViewState(viewState: FavoritePostsListViewState) {
+        val postList = viewState as FavoritePostsListViewState.FavoritePostList
+        when (viewState) {
+            is FavoritePostsListViewState.EmptyListAll -> favoriteList
+            else -> favoriteList = postList.postsList as MutableList<FavoritePosts>
+        }
+    }
+
     private fun inflateRecycler(postsList: AllPostsListViewState.AllPostsList) {
-        val adapter = AllPostsAdapter(postsList.posts, this)
-        binding.allPostsRecyclerView.adapter = adapter
+        val adapter1 = AllPostsAdapter(postsList.posts as MutableList<PostsResponse>, this)
+
+        if (!favoriteList.isNullOrEmpty()) {
+            val sortedList = mutableListOf<PostsResponse>()
+            val adapter2 = AllPostsAdapter(sortedList, this)
+            binding.allPostsRecyclerView.adapter = adapter2
+        }
+
+        binding.allPostsRecyclerView.adapter = adapter1
 
     }
 

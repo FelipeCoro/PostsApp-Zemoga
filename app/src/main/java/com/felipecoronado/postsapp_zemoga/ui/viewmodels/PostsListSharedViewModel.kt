@@ -40,11 +40,15 @@ class PostsListSharedViewModel @Inject constructor(
         viewModelScope.launch() {
             val result = getAllFavoritesList.invoke()
             when {
-                result.isSuccess -> setFavoriteListViewState(FavoritePostsListViewState.FavoriteListAll(result.getOrThrow()))
+                result.isSuccess -> setFavoriteListViewState(FavoritePostsListViewState.FavoritePostList(result.getOrThrow()))
                 else -> setFavoriteListViewState(FavoritePostsListViewState.EmptyListAll)
 
             }
         }
+    }
+
+    fun wipeRecycler(){
+        setAllListViewState(AllPostsListViewState.AllPostsList(mutableListOf()))
     }
 
 

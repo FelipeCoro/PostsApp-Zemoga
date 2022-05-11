@@ -4,7 +4,7 @@ import com.felipecoronado.postsapp_zemoga.data.database.room.models.FavoritePost
 
 sealed interface FavoritePostsListViewState {
 
-    data class FavoriteListAll(val postsList: List<FavoritePosts>) :
+    data class FavoritePostList(val postsList: List<FavoritePosts>) :
         FavoritePostsListViewState
     object EmptyListAll :
         FavoritePostsListViewState

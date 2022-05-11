@@ -31,12 +31,14 @@
                     android:textColor="@color/primaryTextColor"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
                 <ImageView
-                    android:id="@+id/backToAllPostsButton"
+                    android:id="@+id/reloadPostsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|end"
                     android:layout_marginEnd="24dp"
+                    android:clickable="true"
                     app:srcCompat="@drawable/refresh__1_" />
             </androidx.appcompat.widget.Toolbar>
 

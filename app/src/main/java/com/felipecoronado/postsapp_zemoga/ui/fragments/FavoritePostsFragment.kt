@@ -48,12 +48,12 @@ class FavoritePostsFragment : Fragment(),FavoritePostsAdapter.OnItemClickListene
                 "No posts marked as favorite",
                 Toast.LENGTH_LONG
             ).show()
-            else -> inflateRecycler(viewState as FavoritePostsListViewState.FavoriteListAll)
+            else -> inflateRecycler(viewState as FavoritePostsListViewState.FavoritePostList)
 
         }
     }
 
-    private fun inflateRecycler(postsList: FavoritePostsListViewState.FavoriteListAll) {
+    private fun inflateRecycler(postsList: FavoritePostsListViewState.FavoritePostList) {
         val adapter = FavoritePostsAdapter(postsList.postsList, this)
         binding.favoritePostRecycleView.adapter = adapter
 

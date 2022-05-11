@@ -28,7 +28,7 @@ class FavoritePostsAdapter(
         val post = postList[position]
         holder.postView.text = post.title
         holder.postView.setOnClickListener { clickListener.navigate(post.id, post.userId) }
-
+        
     }
 
     override fun getItemCount() = postList.size
